@@ -1,0 +1,27 @@
+<idea-plugin>
+    <id>gl.ro.guess-idea</id>
+    <name>Guess Idea</name>
+    <vendor email="i@ro.gl" url="https://github.com/zored/guess-idea">zored</vendor>
+
+    <description><![CDATA[
+This IDEA plugin autocompletes names used in project.
+- Of values based on type.
+- Of type based on value name.
+    ]]></description>
+
+    <!-- TODO: please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <action id="main.java.SampleAction" class="main.java.SampleAction" text="Sample Action"
+                description="Does some sample stuff">
+            <add-to-group group-id="HelpMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="meta alt K" second-keystroke="I"/>
+        </action>
+    </actions>
+</idea-plugin>
