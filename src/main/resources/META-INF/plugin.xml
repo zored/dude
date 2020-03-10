@@ -14,11 +14,12 @@ This IDEA plugin autocompletes names used in project.
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <fileBasedIndex implementation="gl.ro.guess_idea.index.ValueByTypeIndexExtension"/>
     </extensions>
 
     <actions>
-        <action id="main.java.SampleAction" class="main.java.SampleAction" text="Sample Action"
+        <action id="main.java.SampleAction" class="main.java.SampleAction"
+                text="Sample Action"
                 description="Does some sample stuff">
             <add-to-group group-id="HelpMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="meta alt K" second-keystroke="I"/>
