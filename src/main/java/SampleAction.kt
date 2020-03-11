@@ -17,6 +17,7 @@ class SampleAction() : AnAction() {
         val index = FileBasedIndex.getInstance()
         var keys = HashSet<String>()
         val id = ValueByTypeIndexExtension.NAME
+
         index.processAllKeys(id, { key -> keys.add(key); true }, e.project)
         keys.forEach { key ->
             index.processValues(
