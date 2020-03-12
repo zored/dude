@@ -4,19 +4,12 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.indexing.FileBasedIndex
-import com.sun.tools.javac.util.List
-import com.sun.tools.javac.util.ListBuffer
 import gl.ro.guess_idea.index.ValueByTypeIndexExtension
 
-class ValueByTypeRetriever(private val project: Project) {
+class ValuesByTypeIterator(private val project: Project) : Iterable<Pair<String, String>> {
     private val id = ValueByTypeIndexExtension.NAME
-    fun <T> map(apply: (key: String, value: String) -> T): List<T>? {
-        val result = ListBuffer<T>()
-        forEach { key, value -> result.append(apply(key, value)) }
-        return result.toList()
-    }
 
-    fun forEach(f: (key: String, value: String) -> Unit) {
+    private fun each(f: (key: String, value: String) -> Unit) {
         val keys = HashSet<String>()
         val index = FileBasedIndex.getInstance()
 
@@ -30,5 +23,11 @@ class ValueByTypeRetriever(private val project: Project) {
                 GlobalSearchScope.allScope(project)
             )
         }
+    }
+
+    override fun iterator(): Iterator<Pair<String, String>> {
+        val list = mutableListOf<Pair<String, String>>()
+        each { key, value -> list.add(Pair(key, value)) }
+        return list.listIterator()
     }
 }

@@ -9,22 +9,14 @@ This IDEA plugin autocompletes names used in project.
 - Of type based on value name.
     ]]></description>
 
-    <!-- TODO: please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
+
+    <!-- Requires the Go plugin -->
+    <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileBasedIndex implementation="gl.ro.guess_idea.index.ValueByTypeIndexExtension"/>
         <completion.contributor implementationClass="gl.ro.guess_idea.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
     </extensions>
-
-    <actions>
-        <action id="main.java.SampleAction" class="main.java.SampleAction"
-                text="Sample Action"
-                description="Does some sample stuff">
-            <add-to-group group-id="HelpMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="meta alt K" second-keystroke="I"/>
-        </action>
-    </actions>
 </idea-plugin>

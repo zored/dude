@@ -19,10 +19,18 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version = "2019.3.3"
+    type = "IU"
+    setPlugins(
+        "org.jetbrains.plugins.go:193.6494.35.125",
+        "PsiViewer:193-SNAPSHOT", // todo
+        "com.jetbrains.hackathon.indices.viewer:1.3" // todo
+    )
 }
+
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
@@ -30,11 +38,12 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
+    // todo:
+//    runIde {
+//        setIdeDirectory("/Users/r.akhmerov/Library/Application Support/JetBrains/Toolbox/apps/Goland/ch-0/193.6494.61/GoLand.app/Contents/")
+//    }
 }
+
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes(
-        """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
-    )
+    changeNotes("First version is here.")
 }
