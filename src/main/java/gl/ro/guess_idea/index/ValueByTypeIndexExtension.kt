@@ -10,21 +10,21 @@ import com.intellij.util.io.EnumeratorStringDescriptor
 import com.intellij.util.io.KeyDescriptor
 
 // IDE extension for indexer.
-class ValueByTypeIndexExtension : FileBasedIndexExtension<String, String>() {
-    override fun getName(): ID<String, String> {
+class ValueByTypeIndexExtension : FileBasedIndexExtension<Type, Values>() {
+    override fun getName(): ID<Type, Values> {
         return NAME
     }
 
-    override fun getIndexer(): DataIndexer<String, String, FileContent> {
+    override fun getIndexer(): DataIndexer<Type, Values, FileContent> {
         return ValueByTypeIndexer
     }
 
-    override fun getKeyDescriptor(): KeyDescriptor<String> {
+    override fun getKeyDescriptor(): KeyDescriptor<Type> {
         return DESCRIPTOR
     }
 
-    override fun getValueExternalizer(): DataExternalizer<String> {
-        return DESCRIPTOR
+    override fun getValueExternalizer(): DataExternalizer<Values> {
+        return ValuesExternalizer
     }
 
     override fun getVersion(): Int {
@@ -40,7 +40,7 @@ class ValueByTypeIndexExtension : FileBasedIndexExtension<String, String>() {
     }
 
     companion object {
-        val NAME = ID.create<String, String>("gl.ro.guess_idea.index.value_by_type")
+        val NAME = ID.create<Type, Values>("gl.ro.guess_idea.index.value_by_type")
         const val VERSION = 1
         private val DESCRIPTOR = EnumeratorStringDescriptor.INSTANCE
         private val FILE_TYPES = setOf<LanguageFileType>(

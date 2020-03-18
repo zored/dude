@@ -1,22 +1,27 @@
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
+
 plugins {
     id("org.jetbrains.intellij") version "0.4.16"
     java
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.3.70"
+    kotlin("plugin.serialization") version "1.3.70"
 }
+
 
 group = "gl.ro"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("stdlib", "1.3.70"))
     testCompile("junit", "junit", "4.12")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
 }
 
-// See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version = "2019.3.3"
     type = "IU"
@@ -38,10 +43,6 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-    // todo:
-//    runIde {
-//        setIdeDirectory("/Users/r.akhmerov/Library/Application Support/JetBrains/Toolbox/apps/Goland/ch-0/193.6494.61/GoLand.app/Contents/")
-//    }
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {

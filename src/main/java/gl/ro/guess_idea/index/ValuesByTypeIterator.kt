@@ -1,16 +1,15 @@
-package main.java.gl.ro.guess_idea.index
+package gl.ro.guess_idea.index
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.indexing.FileBasedIndex
-import gl.ro.guess_idea.index.ValueByTypeIndexExtension
 
-class ValuesByTypeIterator(private val project: Project) : Iterable<Pair<String, String>> {
+class ValuesByTypeIterator(private val project: Project) : Iterable<Pair<Type, Values>> {
     private val id = ValueByTypeIndexExtension.NAME
 
-    private fun each(f: (key: String, value: String) -> Unit) {
-        val keys = HashSet<String>()
+    private fun each(f: (key: Type, value: Values) -> Unit) {
+        val keys = mutableSetOf<Type>()
         val index = FileBasedIndex.getInstance()
 
         index.processAllKeys(id, { key -> keys.add(key); true }, project)
@@ -19,15 +18,16 @@ class ValuesByTypeIterator(private val project: Project) : Iterable<Pair<String,
                 id,
                 key,
                 null,
-                { _: VirtualFile, value: String -> f(key, value); true },
+                { _: VirtualFile, value: Values -> f(key, value); true },
                 GlobalSearchScope.allScope(project)
             )
+            Unit
         }
     }
 
-    override fun iterator(): Iterator<Pair<String, String>> {
-        val list = mutableListOf<Pair<String, String>>()
-        each { key, value -> list.add(Pair(key, value)) }
+    override fun iterator(): Iterator<Pair<Type, Values>> {
+        val list = mutableListOf<Pair<Type, Values>>()
+        each { key, values -> list.add(Pair(key, values)) }
         return list.listIterator()
     }
 }

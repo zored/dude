@@ -1,41 +1,32 @@
 package gl.ro.guess_idea.index
 
-import com.goide.psi.*
+import com.goide.psi.GoFile
 import com.intellij.json.JsonUtil
 import com.intellij.json.psi.JsonFile
-import com.intellij.json.psi.JsonProperty
-import com.intellij.json.psi.impl.JsonRecursiveElementVisitor
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
 import gl.ro.guess_idea.index.visitors.GoVisitor
+import gl.ro.guess_idea.index.visitors.JsonVisitor
 
 // Indexes values by types.
-object ValueByTypeIndexer : DataIndexer<String, String, FileContent> {
-    override fun map(inputData: FileContent): Map<String, String> {
+object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
+    override fun map(inputData: FileContent): Map<Type, Values> {
         val valuesByType = ValuesByType()
         val file = inputData.psiFile
         if (file is JsonFile) {
             fillJson(valuesByType, file)
-        }
-        if (file is GoFile) {
+        } else if (file is GoFile) {
             fillGo(valuesByType, file)
         }
-        return valuesByType
+        return valuesByType.toMap()
     }
 
-    private fun fillJson(map: ValuesByType, file: JsonFile) {
-        val jsonObject = JsonUtil.getTopLevelObject(file) ?: return
-        jsonObject.accept(object : JsonRecursiveElementVisitor() {
-            override fun visitProperty(o: JsonProperty) {
-                val value = o.value?.text ?: return
-                val type = o.name
-                map[type] = value
-            }
-        })
+    private fun fillJson(valuesByType: ValuesByType, file: JsonFile) {
+        val json = JsonUtil.getTopLevelObject(file) ?: return
+        json.accept(JsonVisitor(valuesByType))
     }
 
     private fun fillGo(map: ValuesByType, file: GoFile) {
-        val visitor = GoVisitor(map)
-        file.accept(visitor)
+        file.accept(GoVisitor(map))
     }
 }

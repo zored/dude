@@ -1,56 +1,45 @@
 package gl.ro.guess_idea.index.visitors
 
 import com.goide.psi.*
-import com.goide.psi.GoVisitor
 import gl.ro.guess_idea.index.ValuesByType
 
-class GoVisitor(val map: ValuesByType) : GoRecursiveVisitor() {
-
+class GoVisitor(private val valuesByType: ValuesByType) : GoRecursiveVisitor() {
     override fun visitConstDeclaration(o: GoConstDeclaration) {
-        super.visitConstDeclaration(o)
+        super.visitConstDeclaration(o) // todo
     }
 
     override fun visitImportDeclaration(o: GoImportDeclaration) {
-        super.visitImportDeclaration(o)
+        super.visitImportDeclaration(o) // todo
     }
 
     override fun visitParameterDeclaration(o: GoParameterDeclaration) {
-        super.visitParameterDeclaration(o)
-    }
-
-    override fun visitTopLevelDeclaration(o: GoTopLevelDeclaration) {
-        super.visitTopLevelDeclaration(o)
+        val type = o.type?.text ?: return
+        o.paramDefinitionList.forEach { valuesByType[it.text] = type }
     }
 
     override fun visitVarDeclaration(o: GoVarDeclaration) {
-        super.visitVarDeclaration(o)
+        super.visitVarDeclaration(o) // todo
     }
 
-    override fun visitShortVarDeclaration(o: GoShortVarDeclaration) {
-        super.visitShortVarDeclaration(o)
-    }
+    // todo a lot of errors here
+//    override fun visitShortVarDeclaration(o: GoShortVarDeclaration) {
+//        o.varDefinitionList.forEachIndexed { i, d ->
+//            val type = d.text
+//            val value = o.rightExpressionsList[i].text
+//            valuesByType[type] = value
+//        }
+//    }
 
     override fun visitFieldDeclaration(o: GoFieldDeclaration) {
-        super.visitFieldDeclaration(o)
-    }
-
-    override fun visitTypeDeclaration(o: GoTypeDeclaration) {
-        super.visitTypeDeclaration(o)
-    }
-
-    override fun visitFunctionOrMethodDeclaration(o: GoFunctionOrMethodDeclaration) {
-        super.visitFunctionOrMethodDeclaration(o)
-    }
-
-    override fun visitFunctionDeclaration(o: GoFunctionDeclaration) {
-        super.visitFunctionDeclaration(o)
+        val type = o.type?.text ?: return
+        o.fieldDefinitionList.map{valuesByType[type] = it.text}
     }
 
     override fun visitVarOrConstDeclaration(o: GoVarOrConstDeclaration<out GoVarOrConstSpec<*>>) {
-        super.visitVarOrConstDeclaration(o)
+        super.visitVarOrConstDeclaration(o) // todo
     }
 
     override fun visitMethodDeclaration(o: GoMethodDeclaration) {
-        super.visitMethodDeclaration(o)
+        super.visitMethodDeclaration(o) // todo
     }
 }
