@@ -11,7 +11,7 @@ import gl.ro.guess_idea.index.visitors.JsonVisitor
 // Indexes values by types.
 object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
     override fun map(inputData: FileContent): Map<Type, Values> {
-        val valuesByType = ValuesByType()
+        val valuesByType = MutableValuesByType()
         val file = inputData.psiFile
         if (file is JsonFile) {
             fillJson(valuesByType, file)
@@ -21,12 +21,12 @@ object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
         return valuesByType.toMap()
     }
 
-    private fun fillJson(valuesByType: ValuesByType, file: JsonFile) {
+    private fun fillJson(valuesByType: MutableValuesByType, file: JsonFile) {
         val json = JsonUtil.getTopLevelObject(file) ?: return
         json.accept(JsonVisitor(valuesByType))
     }
 
-    private fun fillGo(map: ValuesByType, file: GoFile) {
-        file.accept(GoVisitor(map))
+    private fun fillGo(map: MutableValuesByType, file: GoFile) {
+        file.accept(GoVisitor { type, value -> map[type] = value })
     }
 }

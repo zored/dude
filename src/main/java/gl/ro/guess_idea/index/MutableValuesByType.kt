@@ -1,6 +1,6 @@
 package gl.ro.guess_idea.index
 
-class ValuesByType {
+class MutableValuesByType {
     private var map = mutableMapOf<Type, Values>()
 
     operator fun set(t: Type, v: Value): Boolean {
