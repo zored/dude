@@ -1,4 +1,4 @@
-package gl.ro.guess_idea.completion.type_retriever
+package gl.ro.guess_idea.domain.type_retriever
 
 import com.intellij.psi.PsiElement
 import gl.ro.guess_idea.index.Type

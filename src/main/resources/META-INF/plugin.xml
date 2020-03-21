@@ -10,13 +10,12 @@ This IDEA plugin autocompletes names used in project.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
-
-    <!-- Requires the Go plugin -->
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileBasedIndex implementation="gl.ro.guess_idea.index.ValueByTypeIndexExtension"/>
         <completion.contributor implementationClass="gl.ro.guess_idea.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
+        <nameSuggestionProvider implementation="gl.ro.guess_idea.rename.ValueSuggestionProvider" order="first"/>
     </extensions>
 </idea-plugin>
