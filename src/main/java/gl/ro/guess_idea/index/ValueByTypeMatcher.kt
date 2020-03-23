@@ -1,17 +1,21 @@
 package gl.ro.guess_idea.index
 
 import com.intellij.psi.PsiElement
-import gl.ro.guess_idea.domain.type_retriever.TypeRetrieverImpl
+import gl.ro.guess_idea.domain.retriever.IRetriever
+import gl.ro.guess_idea.domain.retriever.TypeRetrieverImpl
 
 object ValueByTypeMatcher {
-    fun byElement(element: PsiElement): Iterable<Value> {
-        if (!TypeRetrieverImpl.suits(element)) {
-            return listOf()
+    private val RETRIEVER: IRetriever = TypeRetrieverImpl
+    private val EMPTY: Iterable<Value> by lazy { listOf<Value>() }
+
+    fun byElement(e: PsiElement): Iterable<String> {
+        if (!RETRIEVER.suits(e)) {
+            return EMPTY
         }
 
-        val expectedType = TypeRetrieverImpl.get(element) ?: return listOf()
-        return ValuesByTypeIterator(element.project)
-            .filter { (type) -> type == expectedType }
-            .flatMap { (_, values) -> values }
+        val filter = RETRIEVER.getFilter(e) ?: return EMPTY
+        val mapPredicate = RETRIEVER.getMap(e) ?: return EMPTY
+
+        return ValuesByTypeIterator(e.project).filter(filter).flatMap(mapPredicate)
     }
 }

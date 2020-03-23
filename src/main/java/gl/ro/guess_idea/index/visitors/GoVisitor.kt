@@ -3,6 +3,7 @@ package gl.ro.guess_idea.index.visitors
 import com.goide.psi.*
 import com.goide.psi.impl.GoConstSpecImpl
 import com.goide.psi.impl.GoVarSpecImpl
+import com.intellij.openapi.project.DumbService
 import gl.ro.guess_idea.index.Type
 import gl.ro.guess_idea.index.Value
 
@@ -25,6 +26,10 @@ class GoVisitor(private val typeValue: (type: Type, value: Value) -> Unit) : GoR
                     declaration.name ?: return
                 )
                 is GoVarSpecImpl -> declaration.varDefinitionList.forEach { definition ->
+                    if (DumbService.isDumb(definition.project)) {
+                        // do not use `getGoType()`?
+                        return
+                    }
                     typeValue(
                         definition.getGoType(null)?.typeReferenceExpression?.text ?: return,
                         definition.name ?: return

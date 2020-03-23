@@ -1,21 +1,30 @@
-package gl.ro.guess_idea.domain.type_retriever.go
+package gl.ro.guess_idea.domain.retriever.go
 
 import com.goide.GoTypes
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.elementType
-import gl.ro.guess_idea.domain.type_retriever.IRetriever
-import gl.ro.guess_idea.index.Type
+import gl.ro.guess_idea.domain.retriever.FilterPredicate
+import gl.ro.guess_idea.domain.retriever.IRetriever
+import gl.ro.guess_idea.domain.retriever.MapPredicate
 
-class DeclarationRetriever(private val definitionType: IElementType, private val declarationType: IElementType) :
-    IRetriever {
-    override fun get(position: PsiElement): Type? {
-        val parameterDeclaration = getDeclaration(position) ?: return null
-        return parameterDeclaration.children.firstOrNull { it.elementType == GoTypes.TYPE }?.text
+class DeclarationRetriever(
+    private val definitionType: IElementType,
+    private val declarationType: IElementType
+) : IRetriever {
+    override fun getFilter(e: PsiElement): FilterPredicate {
+        val parameterDeclaration = getDeclaration(e) ?: return null
+        val type = parameterDeclaration.children.firstOrNull { it.elementType == GoTypes.TYPE }?.text
+
+        return { it.first == type }
     }
 
-    override fun suits(position: PsiElement): Boolean {
-        return getDeclaration(position) != null
+    override fun suits(e: PsiElement): Boolean {
+        return getDeclaration(e) != null
+    }
+
+    override fun getMap(e: PsiElement): MapPredicate {
+        return { it.second }
     }
 
     private fun getDeclaration(position: PsiElement): PsiElement? {
