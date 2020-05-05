@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("org.jetbrains.intellij") version "0.4.16"
     java
@@ -23,12 +21,12 @@ dependencies {
 }
 
 intellij {
-    version = "2019.3.3"
+    version = "2020.1.1"
     type = "IU"
     setPlugins(
-        "org.jetbrains.plugins.go:193.6494.35.125",
-        "PsiViewer:193-SNAPSHOT", // todo
-        "com.jetbrains.hackathon.indices.viewer:1.3" // todo
+        "org.jetbrains.plugins.go:201.7223.8.147",
+        "PsiViewer:202-SNAPSHOT.3",
+        "com.jetbrains.hackathon.indices.viewer:1.6"
     )
 }
 
