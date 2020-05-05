@@ -6,7 +6,7 @@ Supported languages:
 
 ## What it does?
 - Autocomplete default name by type and vice versa.
-- Defaults are taken from project names and types.
+- Defaults come from project names and types.
 
 
 ## What IDE does?
@@ -18,4 +18,4 @@ Supported languages:
 - There are some heuristic ways for plugin development inspiration:
   - Official docs.
   - Other plugins.
-  - Debugger (for example, you can use "Find in path..." and use some unique string from UI).
+  - Debugger (for example, you can use `"Find in path..."` and use some unique string from the UI).

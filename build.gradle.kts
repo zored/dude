@@ -7,7 +7,7 @@ plugins {
 
 
 group = "gl.ro"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -25,8 +25,8 @@ intellij {
     type = "IU"
     setPlugins(
         "org.jetbrains.plugins.go:201.7223.8.147",
-        "PsiViewer:202-SNAPSHOT.3",
-        "com.jetbrains.hackathon.indices.viewer:1.6"
+        "PsiViewer:201.6251.22-EAP-SNAPSHOT.3",
+        "com.jetbrains.hackathon.indices.viewer:1.4"
     )
 }
 
