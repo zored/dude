@@ -1,13 +1,13 @@
 plugins {
-    id("org.jetbrains.intellij") version "0.4.16"
+    id("org.jetbrains.intellij") version "0.4.19"
     java
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.3.72"
     kotlin("plugin.serialization") version "1.3.70"
 }
 
 
 group = "gl.ro"
-version = "1.0.1"
+version = "1.0.0"
 
 repositories {
     mavenCentral()

@@ -6,7 +6,9 @@ import gl.ro.guess_idea.domain.retriever.TypeRetrieverImpl
 
 object ValueByTypeMatcher {
     private val RETRIEVER: IRetriever = TypeRetrieverImpl
-    private val EMPTY: Iterable<Value> by lazy { listOf() }
+
+    @Suppress("RemoveExplicitTypeArguments")
+    private val EMPTY: Iterable<Value> by lazy { listOf<Value>() }
 
     fun byElement(e: PsiElement): Iterable<String> {
         if (!RETRIEVER.suits(e)) {

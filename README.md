@@ -1,13 +1,13 @@
-# Guess Idea
-IntelliJ IDEA plugin.
+# Dude
+**Dude** (stands for "duplicate declarations") is IntelliJ IDEA plugin which autocompletes your duplicate declarations (and even definitions!).
+
+It will autocomplete for you:
+- Variable and field definition with visibility: `var user *entities.User`.
+- Type name: `type Person struct {}`.
+- Abstract and specific function definitions: `func FindById(id entities.Id) {}`.
 
 Supported languages:
 - GoLang.
-
-## What it does?
-- Autocomplete default name by type and vice versa.
-- Defaults come from project names and types.
-
 
 ## What IDE does?
 - Creates [index](./src/main/java/gl/ro/guess_idea/index) for all type-value pairs.
