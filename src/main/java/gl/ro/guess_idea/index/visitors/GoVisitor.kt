@@ -1,13 +1,16 @@
 package gl.ro.guess_idea.index.visitors
 
+import com.goide.GoFileType
 import com.goide.psi.*
 import com.goide.psi.impl.GoConstSpecImpl
 import com.goide.psi.impl.GoVarSpecImpl
-import com.intellij.openapi.project.DumbService
+import com.intellij.openapi.fileTypes.FileType
 import gl.ro.guess_idea.index.Type
 import gl.ro.guess_idea.index.Value
 
 class GoVisitor(private val typeValue: (type: Type, value: Value) -> Unit) : GoRecursiveVisitor() {
+    fun suitsFile(t: FileType) = t == GoFileType.INSTANCE
+
     override fun visitParameterDeclaration(o: GoParameterDeclaration) {
         val type = o.type?.text ?: return
         o.paramDefinitionList.forEach { typeValue(type, it.text) }
@@ -26,10 +29,6 @@ class GoVisitor(private val typeValue: (type: Type, value: Value) -> Unit) : GoR
                     declaration.name ?: return
                 )
                 is GoVarSpecImpl -> declaration.varDefinitionList.forEach { definition ->
-                    if (DumbService.isDumb(definition.project)) {
-                        // do not use `getGoType()`?
-                        return
-                    }
                     typeValue(
                         definition.getGoType(null)?.typeReferenceExpression?.text ?: return,
                         definition.name ?: return
