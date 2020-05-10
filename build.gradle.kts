@@ -24,8 +24,7 @@ intellij {
     version = "2020.1.1"
     type = "IU"
     setPlugins(
-        "org.jetbrains.plugins.go:201.7223.8.147",
-        "PsiViewer:201.6251.22-EAP-SNAPSHOT.3",
+        "org.jetbrains.plugins.go:201.7223.82.165",
         "com.jetbrains.hackathon.indices.viewer:1.4"
     )
 }
