@@ -23,12 +23,12 @@ const methods = new Methods();
 Deno.args.forEach((file): void => {
   const contents = Deno.readTextFileSync(file);
   const newContents = contents.replace(
-    /<--\s*info\.ts\.textFromXml\(\`(.+?)\`,\s*\`(.+?)\`\)\s*\{\s*-->([\s\S]+?)<--\s*\}\s*-->/gm,
+    /<!--\s*info\.ts\.textFromXml\(\`(.+?)\`,\s*\`(.+?)\`\)\s*\{\s*-->([\s\S]+?)<!--\s*\}\s*-->/gm,
     (match, xmlFile, xpath, contents): string => {
       return [
-        "<-- info.ts.textFromXml(`" + file + "`, `" + xpath + "`) { -->",
+        "<!-- info.ts.textFromXml(`" + file + "`, `" + xpath + "`) { -->",
         methods.textFromXml(xmlFile, xpath).trim(),
-        "<-- } -->",
+        "<!-- } -->",
       ].join("\n");
     },
   );
