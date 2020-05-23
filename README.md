@@ -1,21 +1,34 @@
 # Dude
-**Dude** (stands for "duplicate declarations") is IntelliJ IDEA plugin which autocompletes your duplicate declarations (and even definitions!).
+Autocomplete by name.
 
-It will autocomplete for you:
-- Variable and field definition with visibility: `var user *entities.User`.
-- Type name: `type Person struct {}`.
-- Abstract and specific function definitions: `func FindById(id entities.Id) {}`.
+## Description
+**Dude** (stands for "duplicate declarations") is IntelliJ IDEA plugin.
+
+It autocompletes your named declarations.
+
+
+
+Works with:
+- Values:
+    ```go
+    var user *entities.User
+    ```
+- Types (and fields):
+    ```go
+    type Person struct { name string; }
+    ```
+- Functions (and parameters):
+    ```go
+    func FindById(id entities.Id) (err error)
+    ```
+- Imports:
+    ```go
+    import myEntities "app/entities"
+    ```
 
 Supported languages:
 - GoLang.
 
-## What IDE does?
-- Creates [index](./src/main/java/gl/ro/guess_idea/index) for all type-value pairs.
-- Uses this index in [completion](./src/main/java/gl/ro/guess_idea/completion).
-
-## Dev notes
-- This is Kotlin Jetbrains Intellij IDEA plugin example made with [actual advices](https://www.jetbrains.org/intellij/sdk/docs/basics/basics.html) on their site.
-- There are some heuristic ways for plugin development inspiration:
-  - Official docs.
-  - Other plugins.
-  - Debugger (for example, you can use `"Find in path..."` and use some unique string from the UI).
+## Implementation
+- Create [index](./src/main/java/gl/ro/guess_idea/index) name-definition.
+- Use it in [completions](./src/main/java/gl/ro/guess_idea/completion).
