@@ -1,18 +1,22 @@
 <idea-plugin>
-    <id>gl.ro.guess-idea</id>
-    <name>Guess Idea</name>
+    <id>gl.ro.dude</id>
+    <name>Dude</name>
     <vendor email="i@ro.gl" url="https://github.com/zored/guess-idea">zored</vendor>
 
     <description>
-This IDEA plugin autocompletes names used in project.
-- Of values based on type.
-- Of type based on value name.
+
+        This IDEA plugin autocompletes names used in project.
+        - Of values based on type.
+        - Of type based on value name.
+
     </description>
 
     <change-notes>
-1.0.0
-- First version.
-- Change notes must be at least 40 symbols length.
+
+        1.0.0
+        - First version.
+        - Change notes must be at least 40 symbols length.
+
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
