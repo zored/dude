@@ -1,0 +1,36 @@
+id: gl.ro.dude
+name: Dude
+author:
+  email: i@ro.gl
+  url: https://github.com/zored/guess-idea
+  name: zored
+description:
+  long: |
+    Autocomplete your named entities.
+    **Dude** stands for "duplicate declarations".
+
+    Works with:
+    - Values:
+        ```go
+        var user *entities.User
+        ```
+    - Types (and fields):
+        ```go
+        type Person struct { name string; }
+        ```
+    - Functions (and parameters):
+        ```go
+        func FindById(id entities.Id) (err error)
+        ```
+    - Imports:
+        ```go
+        import myEntities "app/entities"
+        ```
+
+    Implementations:
+    - IntelliJ IDEA plugin.
+
+    Supported languages:
+    - GoLang.
+  short: |
+    Autocomplete by name.

@@ -2,32 +2,11 @@
 Autocomplete by name.
 
 ## Description
-**Dude** (stands for "duplicate declarations") is IntelliJ IDEA plugin.
-
-It autocompletes your named declarations.
-
-
-
-Works with:
-- Values:
-    ```go
-    var user *entities.User
-    ```
-- Types (and fields):
-    ```go
-    type Person struct { name string; }
-    ```
-- Functions (and parameters):
-    ```go
-    func FindById(id entities.Id) (err error)
-    ```
-- Imports:
-    ```go
-    import myEntities "app/entities"
-    ```
-
-Supported languages:
-- GoLang.
+<-- info.ts.textFromXml(`README.md`, `//description[1]`) { -->
+This IDEA plugin autocompletes names used in project.
+- Of values based on type.
+- Of type based on value name.
+<-- } -->
 
 ## Implementation
 - Create [index](./src/main/java/gl/ro/guess_idea/index) name-definition.
