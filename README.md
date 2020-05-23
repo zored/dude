@@ -15,4 +15,4 @@ Autocomplete by name.
 - First version.
 - Change notes must be at least 40 symbols length.<!-- } -->
 
-> Plugin ID: <!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//id[1]") { -->gl.ro.dude<!-- } -->
+> Plugin ID: `<!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//id[1]") { -->gl.ro.dude<!-- } -->`
