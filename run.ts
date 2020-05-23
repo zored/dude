@@ -1,7 +1,7 @@
 #!/usr/bin/env -S deno run --allow-write --allow-read
 import { green } from "https://deno.land/std@0.52.0/fmt/colors.ts";
 import { parse, Args } from "https://deno.land/std/flags/mod.ts";
-import { Info } from "https://raw.githubusercontent.com/zored/deno/v0.0.13/mod.ts";
+import { Info } from "https://raw.githubusercontent.com/zored/deno/v0.0.14/mod.ts";
 const { args, writeTextFileSync, exit, chmodSync } = Deno;
 
 const success = (s: string) => console.log(green(`${s} 😊`));
