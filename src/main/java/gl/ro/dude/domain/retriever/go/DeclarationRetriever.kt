@@ -1,12 +1,12 @@
-package gl.ro.guess_idea.domain.retriever.go
+package gl.ro.dude.domain.retriever.go
 
 import com.goide.GoTypes
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.elementType
-import gl.ro.guess_idea.domain.retriever.FilterPredicate
-import gl.ro.guess_idea.domain.retriever.IRetriever
-import gl.ro.guess_idea.domain.retriever.MapPredicate
+import gl.ro.dude.domain.retriever.FilterPredicate
+import gl.ro.dude.domain.retriever.IRetriever
+import gl.ro.dude.domain.retriever.MapPredicate
 
 class DeclarationRetriever(
     private val definitionType: IElementType,

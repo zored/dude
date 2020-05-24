@@ -1,22 +1,16 @@
-#!/usr/bin/env -S deno run --allow-write --allow-read
-import { green } from "https://deno.land/std@0.52.0/fmt/colors.ts";
+#!/usr/bin/env -S deno run --allow-write --allow-read --allow-run
 import { Args } from "https://deno.land/std/flags/mod.ts";
 import {
   Info,
   Commands,
   GitHooks,
-} from "https://raw.githubusercontent.com/zored/deno/v0.0.16/mod.ts";
+  Runner,
+} from "https://raw.githubusercontent.com/zored/deno/v0.0.17/mod.ts";
 
-const success = (s: string) => console.log(green(s));
-const info = () => {
-  new Info().updateFiles(["README.md"]);
-  success("Updated info files");
-};
-const hooks = new GitHooks({ "pre-commit": info });
-new Commands({
-  info,
-  hooks: (args: Args) => {
-    hooks.run(args);
-    success("Ran git hooks")
-  },
-}).runAndExit();
+const info = () => new Info().updateFiles(["README.md"]);
+const fmt = () => new Runner().run(`deno fmt ./run.ts`);
+
+const gitHooks = new GitHooks({ "pre-commit": info });
+const hooks = (args: Args) => gitHooks.run(args);
+
+new Commands({ info, fmt, hooks }).runAndExit();

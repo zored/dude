@@ -1,8 +1,8 @@
-package gl.ro.guess_idea.index
+package gl.ro.dude.index
 
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
-import gl.ro.guess_idea.index.visitors.GoVisitor
+import gl.ro.dude.index.visitors.GoVisitor
 
 object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
     private val EMPTY by lazy { mapOf<Type, Values>() }

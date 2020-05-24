@@ -1,8 +1,8 @@
-package gl.ro.guess_idea.domain.retriever
+package gl.ro.dude.domain.retriever
 
 import com.intellij.psi.PsiElement
-import gl.ro.guess_idea.domain.retriever.go.DeclarationRetriever
-import gl.ro.guess_idea.domain.retriever.go.IdentifierRetriever
+import gl.ro.dude.domain.retriever.go.DeclarationRetriever
+import gl.ro.dude.domain.retriever.go.IdentifierRetriever
 
 object TypeRetrieverImpl : IRetriever {
     private val RETRIEVERS = DeclarationRetriever.ALL.plus(IdentifierRetriever) // todo add alias support

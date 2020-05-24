@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>gl.ro.dude</id>
     <name>Dude</name>
-    <vendor email="i@ro.gl" url="https://github.com/zored/guess-idea">zored</vendor>
+    <vendor email="i@ro.gl" url="https://github.com/zored">zored</vendor>
 
     <description>
 
@@ -23,9 +23,9 @@ This IDEA plugin autocompletes names used in project.
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileBasedIndex implementation="gl.ro.guess_idea.index.ValueByTypeIndexExtension"/>
-        <completion.contributor implementationClass="gl.ro.guess_idea.completion.ValueCompletionContributor"
+        <fileBasedIndex implementation="gl.ro.dude.index.ValueByTypeIndexExtension"/>
+        <completion.contributor implementationClass="gl.ro.dude.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
-        <nameSuggestionProvider implementation="gl.ro.guess_idea.rename.ValueSuggestionProvider" order="first"/>
+        <nameSuggestionProvider implementation="gl.ro.dude.rename.ValueSuggestionProvider" order="first"/>
     </extensions>
 </idea-plugin>

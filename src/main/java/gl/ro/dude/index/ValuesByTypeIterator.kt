@@ -1,4 +1,4 @@
-package gl.ro.guess_idea.index
+package gl.ro.dude.index
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile

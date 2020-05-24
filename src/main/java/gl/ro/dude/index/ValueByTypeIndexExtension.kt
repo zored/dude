@@ -1,4 +1,4 @@
-package gl.ro.guess_idea.index
+package gl.ro.dude.index
 
 import com.goide.GoFileType
 import com.intellij.json.JsonFileType
@@ -19,7 +19,7 @@ class ValueByTypeIndexExtension : FileBasedIndexExtension<Type, Values>() {
     override fun dependsOnFileContent(): Boolean = true
 
     companion object {
-        val NAME = ID.create<Type, Values>("gl.ro.guess_idea.index.value_by_type")
+        val NAME = ID.create<Type, Values>("_idea.index.value_by_type")
         const val VERSION = 1
         private val DESCRIPTOR = EnumeratorStringDescriptor.INSTANCE
         private val FILE_TYPES = setOf<LanguageFileType>(

@@ -1,4 +1,4 @@
-package gl.ro.guess_idea.completion
+package gl.ro.dude.completion
 
 import com.intellij.codeInsight.completion.*
 import com.intellij.patterns.PlatformPatterns

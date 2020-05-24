@@ -1,4 +1,4 @@
-package gl.ro.guess_idea.index
+package gl.ro.dude.index
 
 import com.intellij.util.io.DataExternalizer
 import com.intellij.util.io.EnumeratorStringDescriptor
