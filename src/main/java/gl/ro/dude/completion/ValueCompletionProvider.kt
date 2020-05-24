@@ -13,6 +13,8 @@ object ValueCompletionProvider : CompletionProvider<CompletionParameters>() {
         context: ProcessingContext,
         result: CompletionResultSet
     ) = result.addAllElements(
-        ValueByTypeMatcher.byElement(parameters.position).map { LookupElementBuilder.create(it) }
+        ValueByTypeMatcher.byElement(parameters.position).map {
+            LookupElementBuilder.create(it)
+        }
     )
 }

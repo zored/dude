@@ -28,4 +28,10 @@ This IDEA plugin autocompletes names used in project.
                                 language="any" order="first"/>
         <nameSuggestionProvider implementation="gl.ro.dude.rename.ValueSuggestionProvider" order="first"/>
     </extensions>
+    <actions>
+        <action id="gl.ro.dude.action.DebugAction" class="gl.ro.dude.action.DebugAction" text="DudeDebug"
+                description="Debug action.">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt D"/>
+        </action>
+    </actions>
 </idea-plugin>

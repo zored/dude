@@ -1,8 +1,7 @@
 plugins {
     id("org.jetbrains.intellij") version "0.4.19"
     java
-    kotlin("jvm") version "1.3.72"
-    kotlin("plugin.serialization") version "1.3.70"
+    kotlin("jvm") version "1.3.70"
 }
 
 
@@ -17,7 +16,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib", "1.3.70"))
     testCompile("junit", "junit", "4.12")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
+
+    testCompile(kotlin("stdlib-jdk8", "1.3.70"))
 }
 
 intellij {
@@ -25,7 +25,8 @@ intellij {
     type = "IU"
     setPlugins(
         "org.jetbrains.plugins.go:201.7223.82.165",
-        "com.jetbrains.hackathon.indices.viewer:1.4"
+        "com.jetbrains.hackathon.indices.viewer:1.4",
+        "java"
     )
 }
 

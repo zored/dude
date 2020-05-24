@@ -5,6 +5,7 @@ import com.goide.psi.*
 import com.goide.psi.impl.GoConstSpecImpl
 import com.goide.psi.impl.GoVarSpecImpl
 import com.intellij.openapi.fileTypes.FileType
+import com.intellij.psi.PsiErrorElement
 import gl.ro.dude.index.Type
 import gl.ro.dude.index.Value
 

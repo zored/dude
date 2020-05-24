@@ -10,5 +10,9 @@ import gl.ro.dude.domain.retriever.MapPredicate
 object IdentifierRetriever : IRetriever {
     override fun getFilter(e: PsiElement): FilterPredicate = { true }
     override fun suits(e: PsiElement): Boolean = e.elementType === GoTypes.IDENTIFIER
-    override fun getMap(e: PsiElement): MapPredicate = { (type, values) -> values.map { "$it $type" } }
+    override fun getMap(e: PsiElement): MapPredicate = { (type, values) ->
+        values.map {
+            "$it $type"
+        }
+    }
 }
