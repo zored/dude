@@ -1,0 +1,10 @@
+language: java
+jdk: oraclejdk8
+script: ./gradlew assemble
+sudo: required
+before_script:
+- chmod +x gradlew
+env:
+  global:
+  - CI_HOME=`pwd`
+  - GRADLE_USER_HOME=`pwd`/.gradle

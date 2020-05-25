@@ -1,0 +1,8 @@
+{
+    "layers": {
+        "general": [
+            "gl.ro.dude.domain",
+            "gl.ro.dude.jetbrains"
+        ]
+    }
+}
