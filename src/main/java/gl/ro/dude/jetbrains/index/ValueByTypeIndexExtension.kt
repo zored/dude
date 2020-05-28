@@ -1,4 +1,4 @@
-package gl.ro.dude.index
+package gl.ro.dude.jetbrains.index
 
 import com.goide.GoFileType
 import com.intellij.json.JsonFileType
@@ -11,10 +11,12 @@ import com.intellij.util.indexing.ID
 import com.intellij.util.io.DataExternalizer
 import com.intellij.util.io.EnumeratorStringDescriptor
 import com.intellij.util.io.KeyDescriptor
+import gl.ro.dude.domain.retriever.Type
+import gl.ro.dude.domain.retriever.Values
 
 class ValueByTypeIndexExtension : FileBasedIndexExtension<Type, Values>() {
     companion object {
-        val NAME = ID.create<Type, Values>("gl.ro.dude.index.value_by_type")
+        val NAME = ID.create<Type, Values>("gl.ro.dude.jetbrains.index.value_by_type")
         private val FILE_TYPES = setOf<LanguageFileType>(
             JsonFileType.INSTANCE,
             GoFileType.INSTANCE

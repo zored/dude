@@ -16,7 +16,6 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib", "1.3.70"))
     testCompile("junit", "junit", "4.12")
-
     testCompile(kotlin("stdlib-jdk8", "1.3.70"))
 }
 
@@ -41,8 +40,4 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-}
-
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes("First version is here.")
 }

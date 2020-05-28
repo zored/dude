@@ -23,13 +23,13 @@ This IDEA plugin autocompletes names used in project.
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileBasedIndex implementation="gl.ro.dude.index.ValueByTypeIndexExtension"/>
-        <completion.contributor implementationClass="gl.ro.dude.completion.ValueCompletionContributor"
+        <fileBasedIndex implementation="gl.ro.dude.jetbrains.index.ValueByTypeIndexExtension"/>
+        <completion.contributor implementationClass="gl.ro.dude.jetbrains.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
-        <nameSuggestionProvider implementation="gl.ro.dude.rename.ValueSuggestionProvider" order="first"/>
+        <nameSuggestionProvider implementation="gl.ro.dude.jetbrains.rename.ValueSuggestionProvider" order="first"/>
     </extensions>
     <actions>
-        <action id="gl.ro.dude.action.DebugAction" class="gl.ro.dude.action.DebugAction" text="DudeDebug"
+        <action id="gl.ro.dude.jetbrains.action.DebugAction" class="gl.ro.dude.jetbrains.action.DebugAction" text="DudeDebug"
                 description="Debug action.">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt D"/>
         </action>

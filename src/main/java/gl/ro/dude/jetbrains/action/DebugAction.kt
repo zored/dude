@@ -1,4 +1,4 @@
-package gl.ro.dude.action
+package gl.ro.dude.jetbrains.action
 
 import com.intellij.ide.util.gotoByName.GotoSymbolModel2
 import com.intellij.openapi.actionSystem.AnAction

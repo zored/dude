@@ -1,8 +1,9 @@
-package gl.ro.dude.index
+package gl.ro.dude.jetbrains.index
 
 import com.intellij.psi.PsiElement
 import gl.ro.dude.domain.retriever.IRetriever
 import gl.ro.dude.domain.retriever.TypeRetrieverImpl
+import gl.ro.dude.domain.retriever.Value
 
 object ValueByTypeMatcher {
     private val RETRIEVER: IRetriever = TypeRetrieverImpl

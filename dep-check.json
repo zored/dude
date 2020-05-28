@@ -1,8 +1,8 @@
 {
     "layers": {
         "general": [
-            "gl.ro.dude.domain",
-            "gl.ro.dude.jetbrains"
+            "gl.ro.dude.jetbrains",
+            "gl.ro.dude.domain"
         ]
     }
 }

@@ -1,8 +1,10 @@
-package gl.ro.dude.index
+package gl.ro.dude.jetbrains.index
 
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
-import gl.ro.dude.index.visitors.GoVisitor
+import gl.ro.dude.domain.retriever.Type
+import gl.ro.dude.domain.retriever.Values
+import gl.ro.dude.jetbrains.index.visitors.GoVisitor
 
 object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
     override fun map(inputData: FileContent): Map<Type, Values> {

@@ -1,7 +1,8 @@
-package gl.ro.dude.index
+package gl.ro.dude.jetbrains.index
 
 import com.intellij.util.io.DataExternalizer
 import com.intellij.util.io.EnumeratorStringDescriptor
+import gl.ro.dude.domain.retriever.Values
 import java.io.DataInput
 import java.io.DataOutput
 

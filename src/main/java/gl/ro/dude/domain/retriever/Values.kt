@@ -1,4 +1,4 @@
-package gl.ro.dude.index
+package gl.ro.dude.domain.retriever
 
 import kotlinx.serialization.Serializable
 
@@ -12,8 +12,14 @@ data class Values(val set: MutableSet<Value>) : Iterable<Value> {
         }
 
 
-        fun stringify(values: Values?): String = values?.set?.joinToString(delimiter) ?: ""
-        fun fromString(str: String): Values = Values(str.splitToSequence(delimiter).toMutableSet())
+        fun stringify(values: Values?): String = values?.set?.joinToString(
+            delimiter
+        ) ?: ""
+        fun fromString(str: String): Values =
+            Values(
+                str.splitToSequence(delimiter)
+                    .toMutableSet()
+            )
     }
 
     override fun iterator(): Iterator<Value> {

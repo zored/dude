@@ -1,4 +1,8 @@
-package gl.ro.dude.index
+package gl.ro.dude.jetbrains.index
+
+import gl.ro.dude.domain.retriever.Type
+import gl.ro.dude.domain.retriever.Value
+import gl.ro.dude.domain.retriever.Values
 
 class MutableValuesByType {
     private var map = mutableMapOf<Type, Values>()

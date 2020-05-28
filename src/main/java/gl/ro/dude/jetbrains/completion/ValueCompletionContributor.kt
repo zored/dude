@@ -1,4 +1,4 @@
-package gl.ro.dude.completion
+package gl.ro.dude.jetbrains.completion
 
 import com.intellij.codeInsight.completion.*
 import com.intellij.patterns.PlatformPatterns
