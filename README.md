@@ -11,8 +11,7 @@ Autocomplete by name.
 - Use it in [completions](./src/main/java/gl/ro/dude/completion).
 
 ## Change notes
-<!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//change-notes[1]") { -->1.0.0
-- First version.
-- Change notes must be at least 40 symbols length.<!-- } -->
+<!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//change-notes[1]") { -->0.0.8
+First release you can use in your editor.<!-- } -->
 
 > Plugin ID: `<!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//id[1]") { -->gl.ro.dude<!-- } -->`
