@@ -11,7 +11,7 @@ const { cwd } = Deno;
 
 const info = () => new Info().updateFiles(["README.md"]);
 const fmt = () => new Runner().run(`deno fmt ./run.ts`);
-const arch = () => new DepChecker().byPaths(cwd(), cwd() + '/dep-check.json');
+const arch = () => new DepChecker().byPaths(cwd(), cwd() + "/dep-check.json");
 
 const gitHooks = new GitHooks({
   "pre-commit": () => {

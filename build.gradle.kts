@@ -22,11 +22,15 @@ dependencies {
 }
 
 intellij {
-    version = "2020.1.1"
+    version = "2020.2"
     type = "IU"
     setPlugins(
-        "org.jetbrains.plugins.go:201.7223.82.165",
-        "com.jetbrains.hackathon.indices.viewer:1.4",
+        // https://plugins.jetbrains.com/plugin/9568-go/versions
+        "org.jetbrains.plugins.go:202.6397.94",
+
+        // https://plugins.jetbrains.com/plugin/13029-indices-viewer/versions
+        // "com.jetbrains.hackathon.indices.viewer:1.8",
+
         "java"
     )
 }
