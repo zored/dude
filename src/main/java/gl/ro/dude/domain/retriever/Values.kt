@@ -19,8 +19,5 @@ data class Values(val set: MutableSet<Value>) : Iterable<Value> {
             )
     }
 
-    override fun iterator(): Iterator<Value> {
-        return set.iterator()
-    }
-
+    override fun iterator() = set.iterator()
 }
