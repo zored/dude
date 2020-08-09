@@ -1,11 +1,8 @@
 package gl.ro.dude.domain.retriever
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class Values(val set: MutableSet<Value>) : Iterable<Value> {
     companion object {
-        private val delimiter = ","
+        private const val delimiter = ","
 
         fun empty(): Values {
             return Values(mutableSetOf())
