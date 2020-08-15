@@ -16,36 +16,12 @@ class DudeGoTest : BasePlatformTestCase() {
         newDefinitions()
     }
 
-    fun `test completion`() {
-        file(
-            """
-    type Ticket struct {
-      ric<caret>
-    }
-    """
-        )
-        val lookupElements = myFixture.completeBasic()
-        assertNotNull(lookupElements)
-        assertSize(2, lookupElements)
-        assertEquals(
-            listOf("ricardo Person", "richard Person"),
-            lookupElements.map { it.lookupString }.toList()
-        )
-    }
+    private fun newDefinitions(): PsiFile =
+        validGo(
+            file(
+                """
+import rick "github.com/zored/rick.git/v5"
 
-    fun `test action`() {
-        Messages.setTestDialog { assertTrue(it.contains("Go names")); Messages.OK }
-        runAction(DebugAction::class)
-    }
-
-    private fun <T : Any> runAction(actionClass: KClass<T>) = myFixture.performEditorAction(getActionId(actionClass))
-
-    private fun <T : Any> getActionId(actionClass: KClass<T>): String =
-        actionClass.java.toString().substring("class.".length)
-
-    private fun newDefinitions(): PsiFile = validGo(
-        file(
-            """
 // Types:
 type Person struct{}
 
@@ -53,8 +29,38 @@ type Person struct{}
 var ricardo Person;
 func ShowPerson(richard Person) {}
 """
+            )
         )
-    )
+
+    fun `test completion`() {
+        file(
+            """
+type Ticket struct {
+  ric<caret>
+}
+    """
+        )
+        val lookupElements = myFixture.completeBasic()
+        val completions = lookupElements.map { it.lookupString }.toList()
+        assertEquals(
+            listOf("ricardo Person", "richard Person"),
+            completions
+        )
+    }
+
+    fun `test action`() {
+        @Suppress("UnstableApiUsage") // TODO
+        Messages.setTestDialog {
+            assertTrue(it.contains("Go names"))
+            Messages.OK
+        }
+        runAction(DebugAction::class)
+    }
+
+    private fun <T : Any> runAction(actionClass: KClass<T>) = myFixture.performEditorAction(getActionId(actionClass))
+
+    private fun <T : Any> getActionId(actionClass: KClass<T>): String =
+        actionClass.java.toString().substring("class.".length)
 
     private fun file(text: String): PsiFile = myFixture.configureByText(
         "${fileIndex++}.go",

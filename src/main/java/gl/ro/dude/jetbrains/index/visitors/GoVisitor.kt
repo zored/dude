@@ -5,10 +5,10 @@ import com.goide.psi.*
 import com.goide.psi.impl.GoConstSpecImpl
 import com.goide.psi.impl.GoVarSpecImpl
 import com.intellij.openapi.fileTypes.FileType
-import gl.ro.dude.domain.retriever.Type
-import gl.ro.dude.domain.retriever.Value
+import gl.ro.dude.domain.retriever.TypeName
+import gl.ro.dude.domain.retriever.ValueName
 
-class GoVisitor(private val typeValue: (type: Type, value: Value) -> Unit) : GoRecursiveVisitor() {
+class GoVisitor(private val typeValue: (type: TypeName, value: ValueName) -> Unit) : GoRecursiveVisitor() {
     fun suitsFile(t: FileType) = t == GoFileType.INSTANCE
 
     override fun visitParameterDeclaration(o: GoParameterDeclaration) {

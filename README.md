@@ -6,10 +6,6 @@ Autocomplete by name.
 - Of values based on type.
 - Of type based on value name.<!-- } -->
 
-## Implementation
-- Create [index](./src/main/java/gl/ro/dude/index) name-definition.
-- Use it in [completions](./src/main/java/gl/ro/dude/completion).
-
 ## Change notes
 <!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//change-notes[1]") { -->0.0.9
 First release you can use in your editor.<!-- } -->

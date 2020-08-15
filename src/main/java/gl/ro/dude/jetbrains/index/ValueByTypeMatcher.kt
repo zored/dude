@@ -2,23 +2,21 @@ package gl.ro.dude.jetbrains.index
 
 import com.intellij.psi.PsiElement
 import gl.ro.dude.domain.retriever.IRetriever
-import gl.ro.dude.domain.retriever.TypeRetrieverImpl
-import gl.ro.dude.domain.retriever.Value
+import gl.ro.dude.domain.retriever.go.TypeRetrieverImpl
+import gl.ro.dude.domain.retriever.ValueName
 
 object ValueByTypeMatcher {
     private val RETRIEVER: IRetriever = TypeRetrieverImpl
 
     @Suppress("RemoveExplicitTypeArguments")
-    private val EMPTY: Iterable<Value> by lazy { listOf<Value>() }
+    private val EMPTY: Iterable<ValueName> by lazy { listOf<ValueName>() }
 
     fun byElement(e: PsiElement): Iterable<String> {
-        if (!RETRIEVER.suits(e)) {
-            return EMPTY
-        }
-
-        val filter = RETRIEVER.getFilter(e) ?: return EMPTY
-        val mapPredicate = RETRIEVER.getMap(e) ?: return EMPTY
-
-        return ValuesByTypeIterator(e.project).filter(filter).flatMap(mapPredicate)
+        return if (RETRIEVER.suits(e))
+            ValuesByTypeIterator(e.project)
+                .filter(RETRIEVER.getFilter(e) ?: return EMPTY)
+                .flatMap(RETRIEVER.getMap(e) ?: return EMPTY)
+        else
+            EMPTY
     }
 }

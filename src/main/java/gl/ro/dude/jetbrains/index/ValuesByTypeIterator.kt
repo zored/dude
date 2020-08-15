@@ -4,32 +4,37 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.indexing.FileBasedIndex
-import gl.ro.dude.domain.retriever.Type
-import gl.ro.dude.domain.retriever.Values
+import gl.ro.dude.domain.retriever.TypeName
+import gl.ro.dude.domain.retriever.TypeValues
+import gl.ro.dude.domain.retriever.ValueNames
 
-class ValuesByTypeIterator(private val project: Project) : Iterable<Pair<Type, Values>> {
+class ValuesByTypeIterator(private val project: Project) : Iterable<TypeValues> {
     private val id = ValueByTypeIndexExtension.NAME
 
-    private fun each(f: (key: Type, value: Values) -> Unit) {
-        val keys = mutableSetOf<Type>()
-        val index = FileBasedIndex.getInstance()
+    override fun iterator(): Iterator<TypeValues> {
+        val list = mutableListOf<TypeValues>()
+        this.each { key, values -> list.add(Pair(key, values)) }
+        return list.iterator()
+    }
 
-        index.processAllKeys(id, { key -> keys.add(key); true }, project)
-        keys.forEach { key ->
-            index.processValues(
+    private fun each(eachCallback: (key: TypeName, value: ValueNames) -> Unit) {
+        getAllKeys().forEach { key ->
+            getIndex().processValues(
                 id,
                 key,
                 null,
-                { _: VirtualFile, value: Values -> f(key, value); true },
+                { _: VirtualFile, value: ValueNames -> eachCallback(key, value); true },
                 GlobalSearchScope.allScope(project)
             )
             Unit
         }
     }
 
-    override fun iterator(): Iterator<Pair<Type, Values>> {
-        val list = mutableListOf<Pair<Type, Values>>()
-        each { key, values -> list.add(Pair(key, values)) }
-        return list.listIterator()
+    private fun getAllKeys(): Set<TypeName> {
+        val keys = mutableSetOf<TypeName>()
+        getIndex().processAllKeys(id, { key -> keys.add(key); true }, project)
+        return keys
     }
+
+    private fun getIndex() = FileBasedIndex.getInstance()
 }
