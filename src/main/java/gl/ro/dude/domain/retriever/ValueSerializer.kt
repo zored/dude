@@ -8,7 +8,11 @@ class ValueSerializer {
     fun serialize(value: Value): String = listOf(value.value, value.type.name, value.typeName).joinToString(delimiter)
 
     fun deserialize(value: String): Value? {
-        val (valueName, typeString, typeName) = value.split(delimiter)
+        val parts = value.split(delimiter)
+        if (parts.size != 3) {
+            return null
+        }
+        val (valueName, typeString, typeName) = parts
         val type: Type
         try {
             type = Type.valueOf(typeString)
