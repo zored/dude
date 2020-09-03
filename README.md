@@ -11,6 +11,9 @@ Autocomplete by name.
 First release you can use in your editor.
 
 0.0.11
-Now imports are suggested in imports section.<!-- } -->
+Now imports are suggested in imports section.
+
+0.0.12
+Fixed minor issues.<!-- } -->
 
 > Plugin ID: <!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//id[1]") { -->gl.ro.dude<!-- } -->
