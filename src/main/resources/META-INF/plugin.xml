@@ -13,13 +13,13 @@ This IDEA plugin autocompletes names used in project.
 
     <change-notes>
 
-0.0.9
+### 0.0.9
 First release you can use in your editor.
 
-0.0.11
+### 0.0.11
 Now imports are suggested in imports section.
 
-0.0.12
+### 0.0.12
 Fixed minor issues.
 
     </change-notes>
