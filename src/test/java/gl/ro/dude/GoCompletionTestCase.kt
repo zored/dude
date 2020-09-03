@@ -6,34 +6,31 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import gl.ro.dude.jetbrains.action.DebugAction
+import junitparams.JUnitParamsRunner
+import junitparams.Parameters
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 import kotlin.reflect.KClass
 
-class DudeGoTest : BasePlatformTestCase() {
+@RunWith(JUnitParamsRunner::class)
+class GoCompletionTestCase : BasePlatformTestCase() {
     var fileIndex = 1
 
-    override fun setUp() {
+    @Before
+    public override fun setUp() {
         super.setUp()
         newDefinitions()
     }
 
-    private fun newDefinitions(): PsiFile =
-        validGo(
-            file(
-                """
-import rick "github.com/zored/rick.git/v5"
-import ricky "github.com/zored/ricky.git/v5"
+    @After
+    public override fun tearDown() {
+        super.tearDown()
+    }
 
-// Types:
-type Person struct{}
-
-// Entities:
-var ricardo Person;
-func ShowPerson(richard Person) {}
-"""
-            )
-        )
-
-    fun `test completion`() {
+    @Test
+    fun `field`() {
         file(
             """
 type Ticket struct {
@@ -47,19 +44,36 @@ type Ticket struct {
         )
     }
 
-    fun `test import completion`() {
-        file(
-            """
-import ric<caret>
-    """
-        )
+    @Test
+    @Parameters(
+        """import ric<caret>""",
+        """import (
+            "fmt"
+            ric<caret>
+       )"""
+    )
+    fun completion(text: String) {
+        file(text)
         assertCompletions(
             "rick \"github.com/zored/rick.git/v5\"",
             "ricky \"github.com/zored/ricky.git/v5\""
         )
     }
 
-    fun `test action`() {
+    @Test
+    @Parameters(
+        """var ric<caret>"""
+    )
+    fun `var`(text: String) {
+        file(text)
+        assertCompletions(
+            "ricardo Person",
+            "richard Person"
+        )
+    }
+
+    @Test
+    fun action() {
         @Suppress("UnstableApiUsage") // TODO
         Messages.setTestDialog {
             assertTrue(it.contains("Go names"))
@@ -91,5 +105,22 @@ import ric<caret>
         assertEquals(
             expected.toList(),
             myFixture.completeBasic().map { it.lookupString }.toList()
+        )
+
+    private fun newDefinitions(): PsiFile =
+        validGo(
+            file(
+                """
+import rick "github.com/zored/rick.git/v5"
+import ricky "github.com/zored/ricky.git/v5"
+
+// Types:
+type Person struct{}
+
+// Entities:
+var ricardo Person;
+func ShowPerson(richard Person) {}
+"""
+            )
         )
 }

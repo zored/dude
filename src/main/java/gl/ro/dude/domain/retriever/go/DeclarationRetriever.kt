@@ -27,12 +27,15 @@ class DeclarationRetriever(
         val nodeType = declaration.children.firstOrNull { it.elementType == GoTypes.TYPE }?.text
 
         return { completions, (t, values) ->
-            if (t === Type.VARIABLE)
-                completions + values
-                    .filter { it.typeName == nodeType }
-                    .map { it.value }
-                    .toList()
-            else
+            if (t === Type.VARIABLE) {
+                completions + (
+                        if (nodeType == null)
+                            values
+                        else
+                            values.filter { it.typeName == nodeType }
+                        )
+                    .map { "${it.name} ${it.typeName}" }
+            } else
                 completions
         }
     }

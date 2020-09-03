@@ -5,7 +5,7 @@ import java.lang.IllegalArgumentException
 class ValueSerializer {
     private val delimiter = "|"
 
-    fun serialize(value: Value): String = listOf(value.value, value.type.name, value.typeName).joinToString(delimiter)
+    fun serialize(value: Value): String = listOf(value.name, value.type.name, value.typeName).joinToString(delimiter)
 
     fun deserialize(value: String): Value? {
         val parts = value.split(delimiter)

@@ -17,7 +17,7 @@ object IdentifierRetriever : ICompletionsRetriever {
                     completions
                 else
                     completions + values
-                        .map { "${it.value} ${it.typeName}" }
+                        .map { "${it.name} ${it.typeName}" }
                         .toList()
             }
 }

@@ -28,7 +28,7 @@ data class Values(private val set: MutableSet<Value>) : Iterable<Value> {
 
     override fun iterator() = set.iterator()
 
-    val names get(): List<ValueName> = set.map { it.value }
+    val names get(): List<ValueName> = set.map { it.name }
 
     fun add(v: Value) = set.add(v)
 }
