@@ -5,7 +5,7 @@ import {
   Commands,
   GitHooks,
   Runner,
-} from "https://raw.githubusercontent.com/zored/deno/v0.0.18/mod.ts";
+} from "https://raw.githubusercontent.com/zored/deno/v0.0.61/mod.ts";
 import { DepChecker } from "https://raw.githubusercontent.com/zored/deno/v0.0.18/src/data/dep-check.ts";
 const { cwd } = Deno;
 
