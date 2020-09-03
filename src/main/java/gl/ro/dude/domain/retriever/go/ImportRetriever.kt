@@ -18,7 +18,7 @@ object ImportRetriever : ICompletionsRetriever {
                     completions
                 else
                     completions + values
-                        .map { "${it.value} ${it.typeName}" }
+                        .map { "${it.value} \"${it.typeName}\"" }
                         .toList()
             }
 }

@@ -54,8 +54,8 @@ import ric<caret>
     """
         )
         assertCompletions(
-            "rick github.com/zored/rick.git/v5",
-            "ricky github.com/zored/ricky.git/v5"
+            "rick \"github.com/zored/rick.git/v5\"",
+            "ricky \"github.com/zored/ricky.git/v5\""
         )
     }
 
