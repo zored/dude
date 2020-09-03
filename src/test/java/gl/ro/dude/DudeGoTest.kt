@@ -21,6 +21,7 @@ class DudeGoTest : BasePlatformTestCase() {
             file(
                 """
 import rick "github.com/zored/rick.git/v5"
+import ricky "github.com/zored/ricky.git/v5"
 
 // Types:
 type Person struct{}
@@ -40,11 +41,21 @@ type Ticket struct {
 }
     """
         )
-        val lookupElements = myFixture.completeBasic()
-        val completions = lookupElements.map { it.lookupString }.toList()
-        assertEquals(
-            listOf("ricardo Person", "richard Person"),
-            completions
+        assertCompletions(
+            "ricardo Person",
+            "richard Person"
+        )
+    }
+
+    fun `test import completion`() {
+        file(
+            """
+import ric<caret>
+    """
+        )
+        assertCompletions(
+            "rick github.com/zored/rick.git/v5",
+            "ricky github.com/zored/ricky.git/v5"
         )
     }
 
@@ -75,4 +86,10 @@ type Ticket struct {
         })
         return file
     }
+
+    private fun assertCompletions(vararg expected: String) =
+        assertEquals(
+            expected.toList(),
+            myFixture.completeBasic().map { it.lookupString }.toList()
+        )
 }
