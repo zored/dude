@@ -16,6 +16,9 @@ This IDEA plugin autocompletes names used in project.
 0.0.9
 First release you can use in your editor.
 
+0.0.11
+Now imports are suggested in imports section.
+
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
