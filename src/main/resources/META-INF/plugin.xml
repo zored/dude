@@ -22,7 +22,7 @@ First release you can use in your editor.
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileBasedIndex implementation="gl.ro.dude.jetbrains.index.ValueByTypeIndexExtension"/>
+        <fileBasedIndex implementation="gl.ro.dude.jetbrains.index.ValuesIndexExtension"/>
         <completion.contributor implementationClass="gl.ro.dude.jetbrains.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
         <nameSuggestionProvider implementation="gl.ro.dude.jetbrains.rename.ValueSuggestionProvider" order="first"/>

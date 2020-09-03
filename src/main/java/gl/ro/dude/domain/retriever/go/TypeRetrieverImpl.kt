@@ -2,6 +2,7 @@ package gl.ro.dude.domain.retriever.go
 
 import com.intellij.psi.PsiElement
 import gl.ro.dude.domain.retriever.FilterPredicate
+import gl.ro.dude.domain.retriever.Folder
 import gl.ro.dude.domain.retriever.IRetriever
 import gl.ro.dude.domain.retriever.MapPredicate
 
@@ -11,9 +12,7 @@ object TypeRetrieverImpl : IRetriever {
 
     override fun suits(e: PsiElement): Boolean = findRetriever(e, true) !== null
 
-    override fun getFilter(e: PsiElement): FilterPredicate = findRetriever(e)?.getFilter(e)
-
-    override fun getMap(e: PsiElement): MapPredicate = findRetriever(e)?.getMap(e)
+    override fun getFolder(e: PsiElement): Folder = findRetriever(e)?.getFolder(e)
 
     private fun findRetriever(e: PsiElement, force: Boolean = false): IRetriever? {
         if (force || last == null) {

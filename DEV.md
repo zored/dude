@@ -1,8 +1,7 @@
 # Dev Notes
 
 ## Implementation
-- Create [index](./src/main/java/gl/ro/dude/index) name-definition.
-- Use it in [completions](./src/main/java/gl/ro/dude/completion).
+On IDE start generate [index](./src/main/java/gl/ro/dude/jetbrains/index) of values. This index is used in [completions](./src/main/java/gl/ro/dude/jetbrains/completion).
 
 ## Dictionary
 Assuming this code:
@@ -10,5 +9,7 @@ Assuming this code:
 val age: Integer
 ```
 
-- **Value** - is `age`. Name of variable, alias, field, etc.
-- **Type** - is `Integer`. The value type.
+- **Value** - is `age: Integer`.
+  - **Name** is `age`.
+  - **TypeName** is `Integer`. This is explicit value type name. 
+  - **Type** is *variable*. This type is to separate completion targets.

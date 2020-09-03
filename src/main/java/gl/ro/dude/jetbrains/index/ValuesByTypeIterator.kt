@@ -4,34 +4,33 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.indexing.FileBasedIndex
-import gl.ro.dude.domain.retriever.TypeName
-import gl.ro.dude.domain.retriever.TypeValues
-import gl.ro.dude.domain.retriever.ValueNames
+import gl.ro.dude.domain.retriever.Type
+import gl.ro.dude.domain.retriever.TypeNameValues
+import gl.ro.dude.domain.retriever.Values
 
-class ValuesByTypeIterator(private val project: Project) : Iterable<TypeValues> {
-    private val id = ValueByTypeIndexExtension.NAME
+class ValuesByTypeIterator(private val project: Project) : Iterable<TypeNameValues> {
+    private val id = ValuesIndexExtension.NAME
 
-    override fun iterator(): Iterator<TypeValues> {
-        val list = mutableListOf<TypeValues>()
+    override fun iterator(): Iterator<TypeNameValues> {
+        val list = mutableListOf<TypeNameValues>()
         this.each { key, values -> list.add(Pair(key, values)) }
         return list.iterator()
     }
 
-    private fun each(eachCallback: (key: TypeName, value: ValueNames) -> Unit) {
+    private fun each(eachCallback: (key: Type, values: Values) -> Unit) =
         getAllKeys().forEach { key ->
-            getIndex().processValues(
+            getIndex().processValues<Type, Values>(
                 id,
                 key,
                 null,
-                { _: VirtualFile, value: ValueNames -> eachCallback(key, value); true },
+                { _: VirtualFile, value: Values -> eachCallback(key, value); true },
                 GlobalSearchScope.allScope(project)
             )
             Unit
         }
-    }
 
-    private fun getAllKeys(): Set<TypeName> {
-        val keys = mutableSetOf<TypeName>()
+    private fun getAllKeys(): Set<Type> {
+        val keys = mutableSetOf<Type>()
         getIndex().processAllKeys(id, { key -> keys.add(key); true }, project)
         return keys
     }

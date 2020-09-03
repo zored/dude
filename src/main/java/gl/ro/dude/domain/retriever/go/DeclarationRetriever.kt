@@ -4,24 +4,29 @@ import com.goide.GoTypes
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.elementType
-import gl.ro.dude.domain.retriever.FilterPredicate
-import gl.ro.dude.domain.retriever.IRetriever
-import gl.ro.dude.domain.retriever.MapPredicate
+import gl.ro.dude.domain.retriever.*
 
 class DeclarationRetriever(
     private val definitionType: IElementType,
     private val declarationType: IElementType
 ) : IRetriever {
-    override fun getFilter(e: PsiElement): FilterPredicate {
-        val declaration = getDeclaration(e) ?: return null
-        val expectedType = declaration.children.firstOrNull { it.elementType == GoTypes.TYPE }?.text
 
-        return { (type) -> type == expectedType }
+    override fun getFolder(e: PsiElement): Folder {
+        val declaration = getDeclaration(e) ?: return null
+        val nodeType = declaration.children.firstOrNull { it.elementType == GoTypes.TYPE }?.text
+
+        return { completions, (t, values) ->
+            if (t === Type.VARIABLE)
+                completions + values
+                    .filter { it.typeName == nodeType }
+                    .map { it.value }
+                    .toList()
+            else
+                completions
+        }
     }
 
     override fun suits(e: PsiElement): Boolean = getDeclaration(e) != null
-
-    override fun getMap(e: PsiElement): MapPredicate = { (_, values) -> values }
 
     private fun getDeclaration(e: PsiElement): PsiElement? {
         val definition = when (definitionType) {

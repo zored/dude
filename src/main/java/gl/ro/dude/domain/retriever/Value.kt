@@ -1,7 +1,7 @@
 package gl.ro.dude.domain.retriever
 
-class Value(
-    value: ValueName,
-    typeName: TypeName,
-    metaType: Type
+data class Value(
+    val value: ValueName,
+    val typeName: TypeName,
+    val type: Type
 )

@@ -4,34 +4,37 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
-import gl.ro.dude.domain.retriever.TypeName
-import gl.ro.dude.domain.retriever.ValueNames
+import gl.ro.dude.domain.retriever.Type
+import gl.ro.dude.domain.retriever.Value
+import gl.ro.dude.domain.retriever.Values
 import gl.ro.dude.jetbrains.index.visitors.GoVisitor
 
-object ValueByTypeIndexer : DataIndexer<TypeName, ValueNames, FileContent> {
-    private val EMPTY by lazy { mapOf<TypeName, ValueNames>() }
+object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
+    private val EMPTY by lazy { mapOf<Type, Values>() }
     private val roots = hashMapOf<Project, String>()
 
-    override fun map(inputData: FileContent): Map<TypeName, ValueNames> {
-        if (!isProjectFile(inputData)) {
+    override fun map(content: FileContent): Map<Type, Values> {
+        if (!isProjectFile(content)) {
             return EMPTY
         }
-        val valuesByType = MutableValuesByType()
-        val visitor = GoVisitor { type, value -> valuesByType[type] = value }
-        if (visitor.suitsFile(inputData.fileType)) {
-            inputData.psiFile.accept(visitor)
+
+        // Retrieve values from Go file:
+        val result = MutableValuesByType()
+        val visitor = GoVisitor { type, value, source -> result[source] = Value(value, type, source) }
+        if (visitor.suitsFile(content.fileType)) {
+            content.psiFile.accept(visitor)
         }
-        return valuesByType.toMap()
+        return result.toMap()
     }
 
     // TODO: better way? settings?
-    private fun isProjectFile(inputData: FileContent): Boolean {
-        val project = inputData.psiFile.project
+    private fun isProjectFile(content: FileContent): Boolean {
+        val project = content.psiFile.project
         val root =
             roots[project]
                 ?: project.guessProjectDir()?.path
                 ?: return true
         roots[project] = root
-        return inputData.file.path.substring(0, root.length) == root
+        return content.file.path.substring(0, root.length) == root
     }
 }
