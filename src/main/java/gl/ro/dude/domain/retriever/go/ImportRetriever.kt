@@ -7,15 +7,13 @@ import gl.ro.dude.domain.retriever.Type
 
 object ImportRetriever : ICompletionsRetriever {
     override fun getFolder(e: PsiElement): OptionalFolder =
-        if (!ContextChecker.isInsideImport(e))
-            null
-        else
+        if (ContextChecker.isInsideImport(e))
             { completions, (t, values) ->
-                if (t !== Type.IMPORT)
-                    completions
-                else
+                if (t === Type.IMPORT)
                     completions + values
-                        .map { "${it.name} \"${it.typeName}\"" }
-                        .toList()
+                else
+                    completions
             }
+        else
+            null
 }

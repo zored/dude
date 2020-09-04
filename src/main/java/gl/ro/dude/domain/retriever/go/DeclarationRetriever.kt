@@ -34,7 +34,6 @@ class DeclarationRetriever(
                         else
                             values.filter { it.typeName == nodeType }
                         )
-                    .map { "${it.name} ${it.typeName}" }
             } else
                 completions
         }

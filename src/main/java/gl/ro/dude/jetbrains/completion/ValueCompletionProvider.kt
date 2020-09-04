@@ -15,9 +15,11 @@ object ValueCompletionProvider : CompletionProvider<CompletionParameters>() {
         parameters: CompletionParameters,
         context: ProcessingContext,
         result: CompletionResultSet
-    ) = result.addAllElements(
-        PsiElementCompletionsFactory
-            .create(parameters.position)
-            .map { LookupElementBuilder.create(it) }
-    )
+    ) {
+        result.addAllElements(
+            PsiElementCompletionsFactory
+                .create(parameters.position)
+                .map { LookupElementBuilder.create(it) }
+        )
+    }
 }

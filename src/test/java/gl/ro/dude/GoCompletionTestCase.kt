@@ -64,6 +64,21 @@ type Ticket struct {
         assertVariables()
     }
 
+    @Test
+    fun completeVariablesOrder() {
+        validGo(
+            file(
+                """
+type s1 struct {richard Person}
+type s2 struct {richard Person}
+type s3 struct {richard Person}
+        """
+            )
+        )
+        file("""func F(ric<caret>) {}""")
+        assertVariables(true)
+    }
+
     private fun file(text: String): PsiFile = myFixture.configureByText(
         "${fileIndex++}.go",
         "package main\n\n$text".trimIndent()
@@ -99,16 +114,24 @@ type Person struct{}
 
 // Entities:
 var ricardo Person;
+type x struct {
+   ricardo Person // - we have more of these names.
+}
 func ShowPerson(richard Person) {}
 """
             )
         )
 
-    private fun assertVariables() =
-        assertCompletions(
+    private fun assertVariables(reverse: Boolean = false) {
+        val items = arrayOf(
             "ricardo Person",
             "richard Person"
         )
+        val expected =
+            if (reverse) items.reversedArray()
+            else items
+        assertCompletions(*expected)
+    }
 
     private fun assertImports() =
         assertCompletions(

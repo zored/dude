@@ -28,7 +28,12 @@ data class Values(private val set: MutableSet<Value>) : Iterable<Value> {
 
     override fun iterator() = set.iterator()
 
-    val names get(): List<ValueName> = set.map { it.name }
-
-    fun add(v: Value) = set.add(v)
+    fun add(v: Value): Boolean =
+        if (set.contains(v)) {
+            set.first { it == v }.occurrences++
+            true
+        } else {
+            set.add(v)
+            false
+        }
 }

@@ -10,7 +10,7 @@ import gl.ro.dude.domain.retriever.Values
 
 class ValuesIndexExtension : FileBasedIndexExtension<Type, Values>() {
     companion object {
-        val NAME = ID.create<Type, Values>("gl.ro.dude.index.values_by_type")
+        val NAME = ID.create<Type, Values>("gl.ro.dude.values_by_type")
     }
 
     override fun getIndexer() = ValueByTypeIndexer
