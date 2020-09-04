@@ -33,10 +33,4 @@ Fixed minor issues.
                                 language="any" order="first"/>
         <nameSuggestionProvider implementation="gl.ro.dude.jetbrains.rename.ValueSuggestionProvider" order="first"/>
     </extensions>
-    <actions>
-        <action id="gl.ro.dude.jetbrains.action.DebugAction" class="gl.ro.dude.jetbrains.action.DebugAction" text="DudeDebug"
-                description="Debug action.">
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt D"/>
-        </action>
-    </actions>
 </idea-plugin>
