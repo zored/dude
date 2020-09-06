@@ -8,7 +8,7 @@ import gl.ro.dude.domain.retriever.Type
 import gl.ro.dude.domain.retriever.TypeNameValues
 import gl.ro.dude.domain.retriever.Values
 
-class ValuesByTypeIterator(private val project: Project) : Iterable<TypeNameValues> {
+class TypeNameValuesIterator(private val project: Project) : Iterable<TypeNameValues> {
     private val id = ValuesIndexExtension.NAME
 
     override fun iterator(): Iterator<TypeNameValues> {

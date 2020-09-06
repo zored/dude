@@ -14,6 +14,9 @@ First release you can use in your editor.
 Now imports are suggested in imports section.
 
 ### 0.0.12
-Fixed minor issues.<!-- } -->
+Fixed minor issues.
+
+### 0.0.13
+Add suggestions priority.<!-- } -->
 
 > Plugin ID: <!-- info.ts.textFromXml("src/main/resources/META-INF/plugin.xml", "//id[1]") { -->gl.ro.dude<!-- } -->

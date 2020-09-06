@@ -11,7 +11,7 @@ class ValueSuggestionProvider : NameSuggestionProvider {
         nameSuggestionContext: PsiElement?,
         result: MutableSet<String>
     ): SuggestedNameInfo? {
-        PsiElementCompletionsFactory.create(element).forEach { result.add(it) }
+        result.addAll(PsiElementCompletionsFactory.createStrings(element) { it.name })
         return null
     }
 }

@@ -22,6 +22,9 @@ Now imports are suggested in imports section.
 ### 0.0.12
 Fixed minor issues.
 
+### 0.0.13
+Add suggestions priority.
+
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
