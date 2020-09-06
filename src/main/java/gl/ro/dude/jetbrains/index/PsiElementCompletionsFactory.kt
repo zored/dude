@@ -13,14 +13,13 @@ object PsiElementCompletionsFactory {
     private val EMPTY: Iterable<ValueName> by lazy { listOf<ValueName>() }
 
     fun create(e: PsiElement): Iterable<String> {
-        val map = ValuesByTypeIterator(e.project)
+        return ValuesByTypeIterator(e.project)
             .fold(
                 listOf(),
                 RETRIEVER.getFolder(e) ?: return EMPTY
             )
             .groupBy { it.getVisibleName() }
             .map { CompletionItem(it.key, it.value.fold(0, { total, v -> total + v.occurrences })) }
-        return map
             .sortedWith { a, b -> b.occurrences - a.occurrences }
             .map { it.completion }
     }
