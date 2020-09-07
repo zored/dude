@@ -1,6 +1,7 @@
 package gl.ro.dude.jetbrains.index
 
 import com.goide.GoFileType
+import com.intellij.lang.javascript.JavaScriptFileType
 import com.intellij.util.indexing.FileBasedIndex.InputFilter
 import com.intellij.util.indexing.FileBasedIndexExtension
 import com.intellij.util.indexing.ID
@@ -18,6 +19,10 @@ class ValuesIndexExtension : FileBasedIndexExtension<Type, Values>() {
     override fun getKeyDescriptor() = EnumDataDescriptor(Type::class.java)
     override fun getValueExternalizer() = ValuesExternalizer
     override fun getVersion() = 1
-    override fun getInputFilter() = InputFilter { it.fileType == GoFileType.INSTANCE }
+    override fun getInputFilter() =
+        InputFilter {
+            it.fileType == GoFileType.INSTANCE || it.fileType == JavaScriptFileType.INSTANCE
+        }
+
     override fun dependsOnFileContent() = true
 }
