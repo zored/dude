@@ -28,7 +28,7 @@ This IDEA plugin autocompletes names used in project.
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileBasedIndex implementation="gl.ro.dude.jetbrains.index.ValuesIndexExtension"/>
+        <fileBasedIndex implementation="gl.ro.dude.jetbrains.index.extension.AbstractValuesIndexExtension"/>
         <completion.contributor implementationClass="gl.ro.dude.jetbrains.completion.ValueCompletionContributor"
                                 language="any" order="first"/>
         <nameSuggestionProvider implementation="gl.ro.dude.jetbrains.rename.ValueSuggestionProvider" order="first"/>

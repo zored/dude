@@ -1,26 +1,34 @@
-package gl.ro.dude.jetbrains.index
+package gl.ro.dude.jetbrains.index.indexer
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.util.indexing.DataIndexer
 import com.intellij.util.indexing.FileContent
-import gl.ro.dude.domain.retriever.Type
-import gl.ro.dude.domain.retriever.Value
-import gl.ro.dude.domain.retriever.Values
+import gl.ro.dude.domain.retriever.*
+import gl.ro.dude.jetbrains.index.MutableValuesByType
 import gl.ro.dude.jetbrains.index.visitors.GoVisitor
 
+typealias ValuesByType = Map<Type, Values>
 object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
     private val EMPTY by lazy { mapOf<Type, Values>() }
     private val roots = hashMapOf<Project, String>()
 
-    override fun map(content: FileContent): Map<Type, Values> {
+    override fun map(content: FileContent): ValuesByType {
         if (!isProjectFile(content)) {
             return EMPTY
         }
 
-        // Retrieve values from Go file:
+        return mapResult(content)
+    }
+
+    private fun mapResult(content: FileContent): ValuesByType {
         val result = MutableValuesByType()
-        val visitor = GoVisitor { type, value, source -> result[source] = Value(value, type, source) }
+        val visit: (typeName: TypeName, value: ValueName, type: Type) -> Unit =
+            { type, value, source -> result[source] = Value(value, type, source) }
+
+        // This thing is unique for language:
+        val visitor = GoVisitor(visit)
+
         if (visitor.suitsFile(content.fileType)) {
             content.psiFile.accept(visitor)
         }

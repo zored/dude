@@ -7,9 +7,10 @@ import com.intellij.util.indexing.FileBasedIndex
 import gl.ro.dude.domain.retriever.Type
 import gl.ro.dude.domain.retriever.TypeNameValues
 import gl.ro.dude.domain.retriever.Values
+import gl.ro.dude.jetbrains.index.extension.AbstractValuesIndexExtension
 
 class TypeNameValuesIterator(private val project: Project) : Iterable<TypeNameValues> {
-    private val id = ValuesIndexExtension.NAME
+    private val id = AbstractValuesIndexExtension.NAME
 
     override fun iterator(): Iterator<TypeNameValues> {
         val list = mutableListOf<TypeNameValues>()
