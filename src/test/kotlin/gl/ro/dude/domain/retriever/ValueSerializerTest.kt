@@ -2,7 +2,7 @@ package gl.ro.dude.domain.retriever
 
 import junit.framework.TestCase
 
-class ValueSerializerTest: TestCase() {
+class ValueSerializerTest : TestCase() {
     fun testAll() {
         val serializer = ValueSerializer()
         val input = Value.create("bob", "Person", Type.VARIABLE, 5)

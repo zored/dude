@@ -19,7 +19,7 @@ object PsiElementCompletionsFactory {
                 listOf(), operation
             )
             .asSequence()
-            .groupBy (nameRetriever)
+            .groupBy(nameRetriever)
             .map {
                 Pair(
                     it.key,

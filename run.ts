@@ -5,12 +5,13 @@ import {
   Commands,
   GitHooks,
   Runner,
-} from "https://raw.githubusercontent.com/zored/deno/v0.0.61/mod.ts";
+} from "https://raw.githubusercontent.com/zored/deno/v0.0.76/mod.ts";
 import { DepChecker } from "https://raw.githubusercontent.com/zored/deno/v0.0.18/src/data/dep-check.ts";
 const { cwd } = Deno;
 
 const info = () => new Info().updateFiles(["README.md"]);
 const fmt = () => new Runner().run(`deno fmt ./run.ts`);
+const lint = () => new Runner().run(`/usr/local/bin//ktlint`)
 const arch = () => new DepChecker().byPaths(cwd(), cwd() + "/dep-check.json");
 
 const gitHooks = new GitHooks({
@@ -21,4 +22,4 @@ const gitHooks = new GitHooks({
 });
 const hooks = (args: Args) => gitHooks.run(args);
 
-new Commands({ info, fmt, hooks, arch }).runAndExit();
+new Commands({ info, fmt, hooks, arch, lint }).runAndExit();

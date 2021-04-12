@@ -29,11 +29,11 @@ class DeclarationRetriever(
         return { completions, (t, values) ->
             if (t === Type.VARIABLE) {
                 completions + (
-                        if (nodeType == null)
-                            values
-                        else
-                            values.filter { it.typeName == nodeType }
-                        )
+                    if (nodeType == null)
+                        values
+                    else
+                        values.filter { it.typeName == nodeType }
+                    )
             } else
                 completions
         }

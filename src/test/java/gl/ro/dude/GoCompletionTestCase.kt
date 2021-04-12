@@ -16,13 +16,13 @@ import org.junit.runner.RunWith
 class GoCompletionTestCase : BasePlatformTestCase() {
     var fileIndex = 1
 
-    @Before
+    @Override
     public override fun setUp() {
         super.setUp()
         newDefinitions()
     }
 
-    @After
+    @Override
     public override fun tearDown() {
         super.tearDown()
     }

@@ -9,20 +9,22 @@ data class Values(private val set: MutableSet<Value>) : Iterable<Value> {
 
         fun stringify(values: Values?): String =
             values?.set
-                ?.joinToString(delimiter)
-                { valueSerializer.serialize(it) } ?: ""
+                ?.joinToString(delimiter) { valueSerializer.serialize(it) } ?: ""
 
         fun fromString(str: String): Values =
             Values(
                 str.splitToSequence(delimiter)
                     .map { valueSerializer.deserialize(it) }
                     .filter { it != null }
-                    .fold(mutableSetOf(), { set, value ->
-                        if (value != null) {
-                            set += value
-                        };
-                        set
-                    })
+                    .fold(
+                        mutableSetOf(),
+                        { set, value ->
+                            if (value != null) {
+                                set += value
+                            }
+                            set
+                        }
+                    )
             )
     }
 

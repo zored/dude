@@ -9,13 +9,12 @@ import gl.ro.dude.domain.retriever.Type
 
 object IdentifierRetriever : ICompletionsRetriever {
     override fun getFolder(e: PsiElement): OptionalFolder =
-        if (e.elementType === GoTypes.IDENTIFIER)
-            { completions, (t, values) ->
-                if (t === Type.VARIABLE)
-                    completions + values
-                else
-                    completions
-            }
+        if (e.elementType === GoTypes.IDENTIFIER) { completions, (t, values) ->
+            if (t === Type.VARIABLE)
+                completions + values
+            else
+                completions
+        }
         else
             null
 }
