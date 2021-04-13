@@ -27,14 +27,13 @@ object ValueByTypeIndexer : DataIndexer<Type, Values, FileContent> {
         return result.toMap()
     }
 
-    // TODO: better way? settings?
     private fun isProjectFile(content: FileContent): Boolean {
         val project = content.psiFile.project
         val root =
             roots[project]
                 ?: project.guessProjectDir()?.path
-                ?: return true
+                ?: return false
         roots[project] = root
-        return content.file.path.substring(0, root.length) == root
+        return content.file.path.startsWith(root)
     }
 }
