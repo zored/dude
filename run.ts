@@ -1,12 +1,12 @@
 #!/usr/bin/env -S deno run --allow-write --allow-read --allow-run
-import { Args } from "https://deno.land/std/flags/mod.ts";
+import { Args } from "https://deno.land/std@0.95.0/flags/mod.ts";
 import {
   Info,
   Commands,
   GitHooks,
   Runner,
-} from "https://raw.githubusercontent.com/zored/deno/v0.0.76/mod.ts";
-import { DepChecker } from "https://raw.githubusercontent.com/zored/deno/v0.0.18/src/data/dep-check.ts";
+} from "https://raw.githubusercontent.com/zored/deno/v0.0.84/mod.ts";
+import { DepChecker } from "https://raw.githubusercontent.com/zored/deno/v0.0.84/src/lib/dep-check.ts";
 const { cwd } = Deno;
 
 const info = () => new Info().updateFiles(["README.md"]);

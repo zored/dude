@@ -15,7 +15,7 @@ object ContextChecker {
     )
 
     fun isInsideImport(e: PsiElement): Boolean {
-        val prev = e.prevSibling
+        val prev = e.prevSibling // todo: Cannot find element among its parent
         val prevType = prev.elementType
         if (prevType?.language == Language.ANY) {
             return isInsideImport(prev)

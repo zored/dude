@@ -7,8 +7,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junitparams.JUnitParamsRunner
 import junitparams.Parameters
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -79,6 +77,20 @@ type s3 struct {richard Person}
         assertVariables(true)
     }
 
+    @Test
+    @Parameters(
+        """
+        func main() {
+            for _<caret> in []string{} {
+
+            }
+        }""",
+    )
+    fun noCompletion(text: String) {
+        file(text)
+        assertCompletions()
+    }
+
     private fun file(text: String): PsiFile = myFixture.configureByText(
         "${fileIndex++}.go",
         "package main\n\n$text".trimIndent()
@@ -118,6 +130,9 @@ type x struct {
    ricardo Person // - we have more of these names.
 }
 func ShowPerson(richard Person) {}
+
+func Underscored(_ Person) {}
+func NoName(Person) {}
 """
             )
         )
