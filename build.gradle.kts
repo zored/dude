@@ -2,8 +2,8 @@ import kotlinx.coroutines.internal.artificialFrame
 
 plugins {
     java
-    id("org.jetbrains.intellij") version "0.7.2" // https://plugins.gradle.org/plugin/org.jetbrains.intellij
-    kotlin("jvm") version "1.5.0-RC" // https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm
+    id("org.jetbrains.intellij") version "1.1.5" // https://plugins.gradle.org/plugin/org.jetbrains.intellij
+    kotlin("jvm") version "1.5.31" // https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm
     id("com.palantir.git-version") version "0.12.3" // https://plugins.gradle.org/plugin/com.palantir.git-version
 }
 
@@ -19,20 +19,20 @@ repositories {
 }
 
 dependencies {
-    testImplementation("junit", "junit", "4.13") // https://mvnrepository.com/artifact/junit/junit
+    testImplementation("junit", "junit", "4.13.2") // https://mvnrepository.com/artifact/junit/junit
     testImplementation("pl.pragmatists", "JUnitParams", "1.1.1") // https://github.com/Pragmatists/JUnitParams
     // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
-    implementation(platform("org.jetbrains.kotlin:kotlin-reflect:1.5.0-RC"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-reflect:1.5.10"))
 }
 
 intellij {
-    version = "2020.3.4"
-    type = "IU"
-    setPlugins(
+    version.set("2021.2.2")
+    type.set("IU")
+    plugins.set(listOf(
         // https://plugins.jetbrains.com/plugin/9568-go/versions
-        "org.jetbrains.plugins.go:203.6682.168",
+        "org.jetbrains.plugins.go:212.5284.31",
         "java"
-    )
+    ))
 }
 
 configure<JavaPluginConvention> {
