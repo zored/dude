@@ -23,11 +23,15 @@ jobs:
 
       # Test:
       - uses: gradle/gradle-build-action@v1.5.1
-        with: { arguments: test }
+        with:
+            arguments: test
+            gradle-version: 6.6.1
 
       # Publish JAR:
       - uses: gradle/gradle-build-action@v1.5.1
-        with: { arguments: jar }
+        with:
+            arguments: jar
+            gradle-version: 6.6.1
       - uses: softprops/action-gh-release@v1
         if: "startsWith(github.ref, 'refs/tags/v')"
         env:
