@@ -22,13 +22,13 @@ jobs:
             check-latest: true
 
       # Test:
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v1.5.1
         with: { arguments: test }
 
       # Publish JAR:
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v1.5.1
         with: { arguments: jar }
-      - uses: softprops/action-gh-release@v1.5.1
+      - uses: softprops/action-gh-release@v1
         if: "startsWith(github.ref, 'refs/tags/v')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
