@@ -1,4 +1,4 @@
-package gl.ro.dude.jetbrains.index
+package gl.ro.dude.jetbrains.index.common
 
 import gl.ro.dude.domain.retriever.Type
 import gl.ro.dude.domain.retriever.Value

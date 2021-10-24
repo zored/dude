@@ -1,4 +1,4 @@
-package gl.ro.dude.jetbrains.index
+package gl.ro.dude.jetbrains.index.common
 
 import com.intellij.codeInsight.completion.PrioritizedLookupElement
 import com.intellij.codeInsight.lookup.LookupElement
@@ -10,20 +10,18 @@ import gl.ro.dude.domain.retriever.Value
 import gl.ro.dude.domain.retriever.go.TypeRetrieverImpl
 
 object PsiElementCompletionsFactory {
-    private val RETRIEVER: ICompletionsRetriever = TypeRetrieverImpl
+    private val retriever: ICompletionsRetriever = TypeRetrieverImpl
 
     fun createStrings(e: PsiElement, nameRetriever: (Value) -> String): Iterable<String> {
-        val operation: Folder = RETRIEVER.getFolder(e) ?: return listOf()
+        val operation: Folder = retriever.getFolder(e) ?: return listOf()
         return TypeNameValuesIterator(e.project)
-            .fold(
-                listOf(), operation
-            )
+            .fold(listOf(), operation)
             .asSequence()
             .groupBy(nameRetriever)
             .map {
                 Pair(
                     it.key,
-                    it.value.fold(0, { total, v -> total + v.occurrences })
+                    it.value.fold(0) { total, v -> total + v.occurrences }
                 )
             }
             .sortedWith { (_, a), (_, b) -> b - a }

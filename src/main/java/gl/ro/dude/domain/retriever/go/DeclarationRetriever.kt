@@ -19,7 +19,7 @@ class DeclarationRetriever(
             Pair(GoTypes.VAR_DEFINITION, GoTypes.VAR_SPEC),
             Pair(GoTypes.CONST_DEFINITION, GoTypes.CONST_DECLARATION)
         )
-        val ALL = DATA.map { (def, decl) -> DeclarationRetriever(def, decl) }
+        val ALL = DATA.map { (def, declaration) -> DeclarationRetriever(def, declaration) }
     }
 
     override fun getFolder(e: PsiElement): OptionalFolder {
