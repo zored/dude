@@ -106,12 +106,8 @@ type s3 struct {richard Person}
     }
 
     private fun assertCompletions(vararg expected: String) {
-        val actual = myFixture.completeBasic() ?: LookupElement.EMPTY_ARRAY
-
-        assertEquals(
-            expected.toList(),
-            actual.map { it.lookupString }.toList()
-        )
+        val actual = (myFixture.completeBasic() ?: LookupElement.EMPTY_ARRAY).map { it.lookupString }.toList()
+        assertEquals(expected.toList(), actual)
     }
 
     private fun newDefinitions(): PsiFile =
@@ -120,6 +116,9 @@ type s3 struct {richard Person}
                 """
 import rick "github.com/zored/rick.git/v5"
 import ricky "github.com/zored/ricky.git/v5"
+import (
+    _ "github.com/zored/blank_import.git/v5"
+)
 
 // Types:
 type Person struct{}
@@ -131,7 +130,7 @@ type x struct {
 }
 func ShowPerson(richard Person) {}
 
-func Underscored(_ Person) {}
+func Underscored(_ Person, _ string) {}
 func NoName(Person) {}
 """
             )

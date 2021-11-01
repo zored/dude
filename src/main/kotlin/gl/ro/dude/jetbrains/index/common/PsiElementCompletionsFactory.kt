@@ -14,9 +14,11 @@ object PsiElementCompletionsFactory {
 
     fun createStrings(e: PsiElement, nameRetriever: (Value) -> String): Iterable<String> {
         val operation: Folder = retriever.getFolder(e) ?: return listOf()
+
+        @Suppress("RedundantAsSequence")
         return TypeNameValuesIterator(e.project)
-            .fold(listOf(), operation)
             .asSequence()
+            .fold(listOf(), operation)
             .groupBy(nameRetriever)
             .map {
                 Pair(

@@ -32,7 +32,7 @@ class ValuesIndexExtension : FileBasedIndexExtension<Type, Values>() {
             return@DataIndexer empty
         }
         val result = MutableValuesByType()
-        val visitor = GoVisitor { type, value, source -> result[source] = Value(value, type, source) }
+        val visitor = GoVisitor { type, value, source -> if (!(source == Type.VARIABLE && value == "_")) result[source] = Value(value, type, source) }
         if (visitor.suitsFile(it.fileType)) {
             it.psiFile.accept(visitor)
         }
